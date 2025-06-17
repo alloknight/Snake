@@ -6,5 +6,5 @@
 int main()
 {
 	Snake a;
-	a.printBoard();
+	a.play();
 }
