@@ -1,16 +1,53 @@
 #include "Snake.h"
+#include "CharReader.h"
 
 #include <iostream>
 #include <vector>
+#include <stdexcept>
 #include <windows.h>
 
-Snake::Snake() : m_board()
+Snake::Snake()
 {
 	_initBoard();
 }
 
-void Snake::_updateSnake(int direction)
+char Snake::_opposite_direction(char direction) const
 {
+	switch (direction)
+	{
+	case(UP_KEY):
+		return DOWN_KEY;
+	case(DOWN_KEY):
+		return UP_KEY;
+	case(LEFT_KEY):
+		return RIGHT_KEY;
+	case(RIGHT_KEY):
+		return LEFT_KEY;
+	default:
+		throw std::runtime_error("Invalid Direction");
+	}
+}
+
+void Snake::_updateSnake(char direction)
+{
+	// if the direction is the same, or opposite, then ignore. 
+	if (direction != m_direction && direction != _opposite_direction(m_direction))
+	{
+		//switch (direction)
+		//{
+		//case(UP_KEY):
+		//	;
+		//case(DOWN_KEY):
+		//	return UP_KEY;
+		//case(LEFT_KEY):
+		//	return RIGHT_KEY;
+		//case(RIGHT_KEY):
+		//	return LEFT_KEY;
+		//default:
+		//	throw std::runtime_error("Invalid Direction");
+		//}
+	}
+
 	// TODO take direction in conserderation.
 	unsigned int new_head_row = m_snake_head_location.first;
 	unsigned int new_head_col = m_snake_head_location.second + 1;
@@ -32,6 +69,13 @@ void Snake::_updateSnake(int direction)
 	m_snake_head_location.second = new_head_col;
 }
 
+void Snake::_updateDirection()
+{
+	char key = getKeyPressed();
+	if (key == 'w' || key == 'a' || key == 's' || key == 'd') {
+		m_direction = key;
+	}
+}
 void Snake::_initSnake()
 {
 	m_snake.push_back(&m_board[8][1]);
@@ -106,6 +150,7 @@ bool Snake::_isGameOver() const
 	{
 		return true;
 	}
+	// TODO: add if snake ate itself.
 	return false;
 }
 
@@ -113,8 +158,9 @@ void Snake::play()
 {
 	while (!_isGameOver())
 	{
-		Sleep(100);
+		Sleep(100); // Make refresh rate slower.
 		printBoard();
-		_updateSnake(0);
+		_updateDirection();
+		_updateSnake();
 	}
 }

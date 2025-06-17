@@ -13,7 +13,11 @@ typedef enum BOARD_STATS
 	SNAKE_SQUARE = 'O',
 	BOARDER_SQUARE = 'X',
 	EMPTY_SQUARE = ' ',
-	FRUIT_SQUARE = '#'
+	FRUIT_SQUARE = '#',
+	UP_KEY = 'w',
+	DOWN_KEY = 's',
+	LEFT_KEY = 'a',
+	RIGHT_KEY = 'd',
 }board_stats_t;
 
 static class Snake {
@@ -23,12 +27,15 @@ public:
 	void play();
 private:
 	void _initBoard();
-	void _updateSnake(int direction);
+	void _updateDirection();
+	void _updateSnake(char direction);
 	void _initSnake();
 	bool _isGameOver() const;
+	char _opposite_direction(char direction) const;
 private:
 	std::array<std::array<char, LENGTH>, WIDTH> m_board;
 	std::vector<char *> m_snake;
 	std::pair<unsigned int, unsigned int>  m_snake_head_location;
 	unsigned int m_points;
+	char m_direction;
 };
