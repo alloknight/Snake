@@ -1,0 +1,89 @@
+# === Core C++ Ignore Rules ===
+
+# Object files
+*.o
+*.obj
+
+# Linker output
+*.lib
+*.a
+*.dll
+*.exe
+*.so
+*.out
+
+# Precompiled headers
+*.gch
+*.pch
+
+# Debug files
+*.pdb
+*.idb
+
+# === Build System Files ===
+
+# CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+build/
+out/
+*.ninja
+.ninja_deps
+.ninja_log
+compile_commands.json
+
+# MSBuild / Visual Studio (in case it's installed too)
+*.sln
+*.vcxproj*
+*.user
+*.filters
+*.vs/
+
+# === VS Code Workspace Settings ===
+.vscode/
+.vs
+
+# === System-Specific Files ===
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# macOS (just in case you cross-platform)
+.DS_Store
+
+# Linux swap files
+*.swp
+
+# === Logs and Temp Files ===
+*.log
+*.tmp
+*.bak
+*~
+
+# === Coverage / Profiling Tools ===
+*.gcda
+*.gcno
+*.gcov
+*.profraw
+*.profdata
+
+# === Package Managers ===
+# Conan
+conan.lock
+conanbuildinfo.*
+conanfile.txt.user
+
+# vcpkg
+vcpkg_installed/
+
+# === clangd / LSP tools ===
+.clangd/
+.cache/
+
+# === Binary Output (Optional) ===
+bin/
+			
